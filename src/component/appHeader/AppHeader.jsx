@@ -1,17 +1,26 @@
-import { Navbar, Container, Nav } from "bootstrap";
+import { Container } from "react-bootstrap";
+import "./appHeader.scss";
 
 const AppHeader = () => {
   return (
-    <Navbar bg="primary" data-bs-theme="dark">
+    <div className="header">
       <Container>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-        </Nav>
+        <nav>
+          <ul className="header__navbar">
+            <li>
+              <a href="#home" className="navbar__link">
+                Все котики
+              </a>
+            </li>
+            <li>
+              <a href="#features" className="navbar__link">
+                Любимые котики
+              </a>
+            </li>
+          </ul>
+        </nav>
       </Container>
-    </Navbar>
+    </div>
   );
 };
 export default AppHeader;

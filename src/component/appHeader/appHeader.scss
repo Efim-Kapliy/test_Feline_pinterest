@@ -1,0 +1,30 @@
+@import "../../style/variables.scss";
+
+.header {
+  background-color: $main-design-color;
+  &__navbar {
+    display: flex;
+    margin-bottom: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+}
+.navbar {
+  &__link {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 24px;
+    font-size: $main-font-size;
+    color: $main-text-color;
+    text-decoration: none;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.25px;
+    opacity: 0.7;
+    &:hover {
+      background-color: $main-hover-color;
+      opacity: 1;
+    }
+  }
+}

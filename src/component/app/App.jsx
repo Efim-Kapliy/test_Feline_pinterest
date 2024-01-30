@@ -1,7 +1,11 @@
-import "./App.css";
+import AppHeader from "../appHeader/AppHeader";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <AppHeader />
+    </>
+  );
 }
 
 export default App;
