@@ -1,11 +1,20 @@
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
 # Задание для Front-end стажёра
 
-Привет! Если ты хочешь стать частью команды Учи.ру в рамках стажёрской программы, 
-то тебе необходимо выполнить небольшое тестовое задание. Это нужно, что бы твои 
+Привет! Если ты хочешь стать частью команды Учи.ру в рамках стажёрской программы,
+то тебе необходимо выполнить небольшое тестовое задание. Это нужно, что бы твои
 потенциальные наставники смогли оценить твои навыки и сравнив их с остальными
-кандидатами выбрать лучших из лучших. 
+кандидатами выбрать лучших из лучших.
 
-Помни, что работающий продукт важнее количества технологий и красивого кода. 
+Помни, что работающий продукт важнее количества технологий и красивого кода.
 
 Удачи!
 
