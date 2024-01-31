@@ -1,0 +1,47 @@
+@import "../../style/variables.scss";
+
+.cats-favorite {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 225px));
+    grid-auto-rows: 225px;
+    column-gap: minmax(12px, 48px);
+    row-gap: 48px;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding: 51px 0 51px 0;
+    list-style-type: none;
+  }
+  &__item {
+    display: block;
+    background: no-repeat 50% / cover;
+    transition: $main-hover-transition;
+    position: relative;
+    &:hover {
+      transition: $main-hover-transition;
+      transform: scale(1.15);
+      box-shadow: $main-hover-shadow;
+      .cats {
+        &__like {
+          opacity: 1;
+          visibility: visible;
+          transform: scale(0.9);
+          transition: $main-hover-transition;
+        }
+      }
+    }
+  }
+  &__like {
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    &:hover {
+      content: url("../../assets/img/favorite_border.svg");
+    }
+  }
+}
