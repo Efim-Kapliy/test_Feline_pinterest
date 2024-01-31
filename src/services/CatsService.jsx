@@ -8,21 +8,21 @@ const useCatsService = () => {
   const _baseOffset = 33;
 
   const getAllCats = async (offset = _baseOffset) => {
-    const res = await request(`${_apiBase}search?limit=15&offset=${offset}&api_key=${_apiKey}`);
+    const res = await request(`${_apiBase}search?limit=15&offset=${offset}&${_apiKey}`);
 
-    return res.data.results.map(_transformCharacter);
+    return res.map(_transformCharacter);
   };
 
-  const getCat = async (id) => {
+  const getCat = async id => {
     const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
 
-    return _transformCharacter(res.data.results[0]);
+    return _transformCharacter(res);
   };
 
-  const _transformCharacter = (char) => {
+  const _transformCharacter = cat => {
     return {
-      id: char.id,
-      thumbnail: char.url,
+      id: cat.id,
+      thumbnail: cat.url,
     };
   };
 
