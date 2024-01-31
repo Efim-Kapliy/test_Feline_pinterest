@@ -26,5 +26,9 @@
       background-color: $main-hover-color;
       opacity: 1;
     }
+    &_active {
+      background-color: $main-hover-color;
+      opacity: 1;
+    }
   }
 }

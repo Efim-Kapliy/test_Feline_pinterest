@@ -1,8 +1,8 @@
-import { useState, lazy, createContext } from "react";
+import { useState, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AppHeader from "../appHeader/AppHeader";
-import CatList from "../catList/CatList";
-import CatFavorite from "../catFavorite/CatFavorite";
+
 const MainPage = lazy(() => import("../pages/MainPage"));
 const CatFavoritePage = lazy(() => import("../pages/CatFavoritePage"));
 
@@ -18,15 +18,34 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <AppHeader />
-      <MainPage addCatInFavoriteList={addCatInFavoriteList} removeCatInFavoriteList={removeCatInFavoriteList} />
-      <CatFavoritePage
-        favoriteCatList={favoriteCatList}
-        addCatInFavoriteList={addCatInFavoriteList}
-        removeCatInFavoriteList={removeCatInFavoriteList}
-      />
-    </>
+      <main>
+        <Suspense fallback={<h1>Hello!</h1>}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  addCatInFavoriteList={addCatInFavoriteList}
+                  removeCatInFavoriteList={removeCatInFavoriteList}
+                />
+              }
+            />
+            <Route
+              path="/favorite"
+              element={
+                <CatFavoritePage
+                  favoriteCatList={favoriteCatList}
+                  addCatInFavoriteList={addCatInFavoriteList}
+                  removeCatInFavoriteList={removeCatInFavoriteList}
+                />
+              }
+            />
+          </Routes>
+        </Suspense>
+      </main>
+    </Router>
   );
 }
 

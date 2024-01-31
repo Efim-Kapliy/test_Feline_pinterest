@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import "./appHeader.scss";
 
@@ -8,14 +9,21 @@ const AppHeader = () => {
         <nav>
           <ul className="header__navbar">
             <li>
-              <a href="#home" className="navbar__link">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) => (isActive ? "navbar__link navbar__link_active" : "navbar__link")}
+              >
                 Все котики
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#features" className="navbar__link">
+              <NavLink
+                to="/favorite"
+                className={({ isActive }) => (isActive ? "navbar__link navbar__link_active" : "navbar__link")}
+              >
                 Любимые котики
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
