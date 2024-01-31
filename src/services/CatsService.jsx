@@ -13,16 +13,17 @@ const useCatsService = () => {
     return res.map(_transformCharacter);
   };
 
-  const getCat = async id => {
+  const getCat = async (id) => {
     const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
 
     return _transformCharacter(res);
   };
 
-  const _transformCharacter = cat => {
+  const _transformCharacter = (cat) => {
     return {
       id: cat.id,
       thumbnail: cat.url,
+      favorite: false,
     };
   };
 

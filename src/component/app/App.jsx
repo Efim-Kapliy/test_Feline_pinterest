@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import AppHeader from "../appHeader/AppHeader";
 import CatList from "../catList/CatList";
@@ -6,15 +6,24 @@ import CatFavorite from "../catFavorite/CatFavorite";
 
 function App() {
   const [favoriteCatList, setFavoriteCatList] = useState([]);
-  useEffect(() => {
-    console.log(favoriteCatList);
-  }, [favoriteCatList]);
+
+  const addCatInFavoriteList = (cat) => {
+    setFavoriteCatList((favoriteCatList) => [...favoriteCatList, cat]);
+  };
+  const removeCatInFavoriteList = (cat) => {
+    const filteredList = favoriteCatList.filter((item) => item.id !== cat.id);
+    setFavoriteCatList(filteredList);
+  };
 
   return (
     <>
       <AppHeader />
-      {/* <CatList favoriteCatList={favoriteCatList} setFavoriteCatList={setFavoriteCatList}/> */}
-      <CatFavorite favoriteCatList={favoriteCatList} setFavoriteCatList={setFavoriteCatList} />
+      <CatList addCatInFavoriteList={addCatInFavoriteList} removeCatInFavoriteList={removeCatInFavoriteList} />
+      <CatFavorite
+        favoriteCatList={favoriteCatList}
+        addCatInFavoriteList={addCatInFavoriteList}
+        removeCatInFavoriteList={removeCatInFavoriteList}
+      />
     </>
   );
 }

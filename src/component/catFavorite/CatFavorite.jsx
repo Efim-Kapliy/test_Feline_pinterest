@@ -1,16 +1,27 @@
+import { Container } from "react-bootstrap";
 import "./catFavorite.scss";
 
 import favoriteBorder from "../../assets/img/favorite_border.svg";
 import favorite from "../../assets/img/favorite.svg";
 
-const add CatFavorite component = (props) => {
-  const { favoriteCatList, setFavoriteCatList } = props;
+const CatFavorite = (props) => {
+  const { favoriteCatList, addCatInFavoriteList, removeCatInFavoriteList } = props;
+
+  function onCatFavorite(item) {
+    !item.favorite ? addCatInFavoriteList(item) : removeCatInFavoriteList(item);
+    item.favorite = !item.favorite;
+  }
 
   function renderItems(arr) {
-    const items = arr.map((item, i) => {
+    const items = arr.map((item) => {
       return (
-        <li key={i} className="cats-favorite__item" style={{ backgroundImage: `url(${item.thumbnail})` }} tabIndex="0">
-          <img src={favorite} alt="cat" className="cats-favorite__like" />
+        <li
+          key={item.id}
+          className="cats-favorite__item"
+          style={{ backgroundImage: `url(${item.thumbnail})` }}
+          tabIndex="0"
+        >
+          <img src={favorite} alt="cat" className="cats-favorite__like" onClick={() => onCatFavorite(item)} />
         </li>
       );
     });
@@ -19,7 +30,7 @@ const add CatFavorite component = (props) => {
 
   const items = renderItems(favoriteCatList);
 
-  return <>{items}</>;
+  return <Container>{items}</Container>;
 };
 
 export default CatFavorite;
