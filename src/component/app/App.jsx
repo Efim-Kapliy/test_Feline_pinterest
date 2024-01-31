@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, lazy, createContext } from "react";
 
 import AppHeader from "../appHeader/AppHeader";
 import CatList from "../catList/CatList";
 import CatFavorite from "../catFavorite/CatFavorite";
+const MainPage = lazy(() => import("../pages/MainPage"));
+const CatFavoritePage = lazy(() => import("../pages/CatFavoritePage"));
 
 function App() {
   const [favoriteCatList, setFavoriteCatList] = useState([]);
@@ -18,8 +20,8 @@ function App() {
   return (
     <>
       <AppHeader />
-      <CatList addCatInFavoriteList={addCatInFavoriteList} removeCatInFavoriteList={removeCatInFavoriteList} />
-      <CatFavorite
+      <MainPage addCatInFavoriteList={addCatInFavoriteList} removeCatInFavoriteList={removeCatInFavoriteList} />
+      <CatFavoritePage
         favoriteCatList={favoriteCatList}
         addCatInFavoriteList={addCatInFavoriteList}
         removeCatInFavoriteList={removeCatInFavoriteList}

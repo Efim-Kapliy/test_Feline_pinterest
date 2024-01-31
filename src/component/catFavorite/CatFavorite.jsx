@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Container } from "react-bootstrap";
 import "./catFavorite.scss";
 
@@ -31,6 +32,12 @@ const CatFavorite = (props) => {
   const items = renderItems(favoriteCatList);
 
   return <Container>{items}</Container>;
+};
+
+CatFavorite.propTypes = {
+  favoriteCatList: PropTypes.array.isRequired,
+  addCatInFavoriteList: PropTypes.func.isRequired,
+  removeCatInFavoriteList: PropTypes.func.isRequired,
 };
 
 export default CatFavorite;

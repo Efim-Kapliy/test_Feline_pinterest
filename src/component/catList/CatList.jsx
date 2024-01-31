@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
+import PropTypes from "prop-types";
 import "./catList.scss";
 
 import useCatsService from "../../services/CatsService";
@@ -67,6 +68,11 @@ const CatList = (props) => {
       </button>
     </Container>
   );
+};
+
+CatList.propTypes = {
+  addCatInFavoriteList: PropTypes.func.isRequired,
+  removeCatInFavoriteList: PropTypes.func.isRequired,
 };
 
 export default CatList;
