@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AppHeader from "../appHeader/AppHeader";
 import Spinner from "../spinner/Spinner";
 
+const Page404 = lazy(() => import("../pages/404Page/404Page"));
 const MainPage = lazy(() => import("../pages/MainPage"));
 const CatFavoritePage = lazy(() => import("../pages/CatFavoritePage"));
 
@@ -44,6 +45,7 @@ function App() {
                 />
               }
             />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </Suspense>
       </main>

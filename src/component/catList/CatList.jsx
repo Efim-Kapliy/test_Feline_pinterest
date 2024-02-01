@@ -4,15 +4,17 @@ import PropTypes from "prop-types";
 import "./catList.scss";
 
 import useCatsService from "../../services/CatsService";
-
 import Spinner from "../spinner/Spinner";
+import ErrorMassage from "../error/ErrorMassage";
+
 import favoriteBorder from "../../assets/img/favorite_border.svg";
 import favorite from "../../assets/img/favorite.svg";
 
 const CatList = (props) => {
   const [catList, setCatList] = useState([]);
-  const [offset, setOffset] = useState(24);
+  const [offset, setOffset] = useState(18);
   const [catEnded, setCatEnded] = useState(false);
+  const [buttonLoadingLocked, setButtonLoadingLocked] = useState(true);
 
   const { loading, error, getAllCats } = useCatsService();
   const { favoriteCatList, addCatInFavoriteList, removeCatInFavoriteList } = props;
@@ -25,7 +27,8 @@ const CatList = (props) => {
   }, []);
 
   function onRequest(offset) {
-    getAllCats(offset).then(onCatListLoaded);
+    setButtonLoadingLocked(true);
+    getAllCats(offset).then(onCatListLoaded).finally(setButtonLoadingLocked(false));
   }
 
   function onCatListLoaded(newCatList) {
@@ -41,7 +44,6 @@ const CatList = (props) => {
 
   const renderItems = useCallback(
     (arr) => {
-      console.log("Render");
       const items = arr.map((item) => {
         favoriteCatList.map((favoriteItem) => favoriteItem.id === item.id && (item = favoriteItem));
         return (
@@ -65,13 +67,16 @@ const CatList = (props) => {
 
   const content = renderItems(catList);
   const spinner = loading && <Spinner />;
+  const errorMassage = error && <ErrorMassage />;
 
   return (
     <Container>
       {content}
       {spinner}
+      {errorMassage}
       <button
         className="cats__button"
+        disabled={buttonLoadingLocked}
         onClick={() => onRequest(offset)}
         style={{ display: catEnded ? "none" : "block" }}
       >

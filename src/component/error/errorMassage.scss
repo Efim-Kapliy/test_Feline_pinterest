@@ -1,0 +1,390 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+/*Functions*/
+@mixin stars() {
+  $total_stars: 30; //Number of Stars --> <li></li>
+  @for $i from 1 through $total_stars {
+    li:nth-child(#{$i}) {
+      $size: (random(11) + 4) + px;
+      position: absolute;
+      left: (random(80) + 10%);
+      top: (random(80) + 10%);
+      width: $size;
+      height: $size;
+      animation: blink infinite (random(6) + 4s) (random(2) + 2s);
+    }
+  }
+}
+
+/*Vars*/
+:root {
+  --anim-duration: 3s;
+  --scene-bg: #25272b;
+  --scene-bg-rgb: 37 39 43;
+  --cloud: #454951;
+  --stars-color: #f1f1f1;
+  --moon-color: #fff5dd;
+  --moon-size: clamp(50px, 10vw, 100px);
+  --ghost-color: #eef0ff;
+  --ghost-shadow: #a6a8b2;
+  --ghost-details: #3b4351;
+  --ghost-size: 35%;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Bebas Neue", cursive;
+  background: #f4f4f4;
+}
+section {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  overflow: hidden;
+  .animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+}
+h2 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: bold;
+  font-size: clamp(320px, 60vw, 550px);
+  color: rgb(var(--scene-bg-rgb));
+  text-shadow: 30px 30px 60px rgb(var(--scene-bg-rgb) / 40%);
+  margin: 0 2vw;
+  line-height: 1;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+.scene {
+  background: var(--scene-bg);
+  width: 60vw;
+  height: 60vw;
+  min-width: 320px;
+  min-height: 320px;
+  max-height: 500px;
+  max-width: 500px;
+  border-radius: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 50px 50px 100px 0 rgb(var(--scene-bg-rgb) / 50%);
+  position: relative;
+  flex-shrink: 0;
+  .stars {
+    display: flex;
+    flex-wrap: nowrap;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    li {
+      opacity: 0.8;
+      &:before {
+        content: "";
+        background: linear-gradient(transparent, var(--stars-color), transparent);
+        position: absolute;
+        top: 50%;
+        width: 10%;
+        height: 100%;
+        border-radius: 0 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      &:after {
+        content: "";
+        background: linear-gradient(90deg, transparent, var(--stars-color), transparent);
+        position: absolute;
+        top: 50%;
+        height: 10%;
+        width: 100%;
+        border-radius: 0 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    @include stars();
+  }
+  .moon {
+    position: absolute;
+    z-index: 1;
+    top: 70px;
+    left: 90px;
+    background: var(--scene-bg);
+    border-radius: 100%;
+    width: var(--moon-size);
+    height: var(--moon-size);
+    box-shadow: inset calc(var(--moon-size) / -5) calc(var(--moon-size) / -5) 0 0 var(--moon-color);
+  }
+  .clouds {
+    display: flex;
+    flex-wrap: nowrap;
+    position: absolute;
+    animation: linear 10s infinite cloudsMove;
+    li {
+      width: clamp(80px, 5vw, 100px);
+      border-radius: 20px;
+      height: clamp(20px, 5vw, 30px);
+      background: var(--cloud);
+      position: relative;
+      margin: 0 clamp(20px, 5vw, 60px);
+      &:nth-child(even) {
+        transform: translatey(5vw);
+      }
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 40px;
+        border-radius: 25px;
+        height: 25px;
+        top: -12px;
+        left: 50%;
+        transform: translatex(-50%);
+        background: inherit;
+      }
+    }
+  }
+}
+.ghost {
+  background: transparent;
+  max-width: 140px;
+  width: var(--ghost-size);
+  max-height: 230px;
+  height: calc(var(--ghost-size) * 1.7);
+  border-radius: 70px 70px 0 0;
+  display: flex;
+  flex-direction: column;
+  transform: rotate(-15deg);
+  animation: ghostMove var(--anim-duration) ease-in-out infinite;
+  z-index: 2;
+
+  &:before {
+    content: "";
+    position: absolute;
+    height: calc(100% - 40px);
+    width: 100%;
+    background: var(--ghost-color);
+    border-radius: 70px 70px 0 0;
+    z-index: 3;
+  }
+  &__tooltip {
+    transform-origin: bottom right;
+    padding: 1rem 1.5rem;
+    font-size: 3em;
+    background: #ff8711;
+    color: black;
+    border-radius: 1.2rem;
+    position: absolute;
+    left: 0px;
+    top: -40px;
+    transform: translatex(-100%);
+    animation: showTooltip var(--anim-duration) ease-in-out infinite;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #ff8711;
+      bottom: -15px;
+      right: 30px;
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+    }
+  }
+  &__eyes {
+    display: flex;
+    justify-content: center;
+    animation: turning var(--anim-duration) ease-in-out infinite;
+    z-index: 3;
+    .eye {
+      margin: 20px;
+      margin-top: 60px;
+      background-color: var(--ghost-details);
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      position: relative;
+      box-shadow: -10px 25px 3px 0 #ff9696;
+      &:last-of-type {
+        box-shadow: 10px 25px 3px 0 #ff9696;
+      }
+      &:before {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        display: block;
+        border-radius: 100%;
+        background: white;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+  &__mouth {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    animation: turning var(--anim-duration) ease-in-out infinite;
+    z-index: 3;
+    &:before {
+      content: "";
+      display: block;
+      background: var(--ghost-details);
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      animation: openMouth var(--anim-duration) ease-in-out infinite;
+    }
+  }
+  &__tail {
+    background: transparent; // var(--scene-bg);
+    width: 100%;
+    //height: 40px;
+    height: calc(var(--ghost-size) / 2);
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: calc(var(--ghost-size) * 0.2);
+    &:before {
+      content: "";
+      display: block;
+      width: 200%;
+      height: 800%;
+      border-radius: 50%;
+      background: var(--ghost-color);
+      position: absolute;
+      bottom: 0px;
+      margin-left: -50%;
+      animation: wave calc(var(--anim-duration) / 2) linear infinite;
+      z-index: 1;
+    }
+    &:after {
+      content: "";
+      z-index: 0;
+      display: block;
+      width: 200%;
+      height: 800%;
+      border-radius: 50%;
+      background: var(--ghost-shadow);
+      position: absolute;
+      bottom: 10px;
+      margin-left: -50%;
+    }
+  }
+}
+
+/*Animations*/
+@keyframes turning {
+  0%,
+  100% {
+    transform: translateX(0%) rotateY(0deg);
+  }
+  50%,
+  59.9% {
+    transform: translateX(50%) rotateY(90deg);
+  }
+  60% {
+    transform: translateX(-50%) rotateY(-90deg);
+  }
+}
+
+@keyframes wave {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+    transform: scale(0.2) rotate(180deg);
+  }
+}
+
+@keyframes ghostMove {
+  0%,
+  100% {
+    transform: rotate(-20deg) translate(0px, 0px);
+  }
+  33% {
+    transform: rotate(-35deg) translate(120px, 20px);
+  }
+  66% {
+    transform: rotate(-40deg) translate(0px, 80px);
+  }
+}
+
+@keyframes cloudsMove {
+  to {
+    transform: translatex(-33.3%);
+  }
+}
+@keyframes openMouth {
+  25%,
+  75% {
+    height: 20px;
+    width: 50px;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  }
+}
+@keyframes showTooltip {
+  0%,
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) translatex(-100%);
+  }
+  20%,
+  80% {
+    opacity: 0;
+    transform: rotate(-55deg) translatex(-100%);
+  }
+}
+
+/*Dev*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap");
+.dev {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  font-size: clamp(8px, 3vw, 14px);
+  top: 1vw;
+  left: 1vw;
+  padding: 1em;
+  color: #111;
+  background-color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 10px 10px 25px 0 rgb(0 0 0 / 5%);
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #111;
+    transition: ease all 0.3s;
+    &:hover {
+      color: #ef5350;
+      text-decoration: underline;
+    }
+  }
+  span {
+    display: inline-block;
+    transition: ease all 0.3s;
+    color: #ef5350;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
