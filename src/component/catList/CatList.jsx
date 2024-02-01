@@ -5,6 +5,7 @@ import "./catList.scss";
 
 import useCatsService from "../../services/CatsService";
 
+import Spinner from "../spinner/Spinner";
 import favoriteBorder from "../../assets/img/favorite_border.svg";
 import favorite from "../../assets/img/favorite.svg";
 
@@ -62,11 +63,13 @@ const CatList = (props) => {
     [catList]
   );
 
-  const items = renderItems(catList);
+  const content = renderItems(catList);
+  const spinner = loading && <Spinner />;
 
   return (
     <Container>
-      {items}
+      {content}
+      {spinner}
       <button
         className="cats__button"
         onClick={() => onRequest(offset)}

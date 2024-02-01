@@ -29,9 +29,15 @@ const CatFavorite = (props) => {
     return <ul className="cats-favorite__grid">{items}</ul>;
   }
 
-  const items = renderItems(favoriteCatList);
+  const content = favoriteCatList.length > 0 && renderItems(favoriteCatList);
+  const notification = favoriteCatList.length < 1 && "Список любимых котиков пока пуст...";
 
-  return <Container>{items}</Container>;
+  return (
+    <Container>
+      {content}
+      {notification}
+    </Container>
+  );
 };
 
 CatFavorite.propTypes = {
