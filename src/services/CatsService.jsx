@@ -8,7 +8,7 @@ const useCatsService = () => {
   const _baseOffset = 33;
 
   const getAllCats = async (offset = _baseOffset) => {
-    const res = await request(`${_apiBase}search?limit=15&offset=${offset}&${_apiKey}`);
+    const res = await request(`${_apiBase}search?limit=15&order=ASC&page=${offset}&${_apiKey}`);
 
     return res.map(_transformCharacter);
   };
