@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-
 /*Functions*/
 @mixin stars() {
   $total_stars: 30; //Number of Stars --> <li></li>
@@ -30,17 +28,7 @@
   --ghost-details: #3b4351;
   --ghost-size: 35%;
 }
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
 
-body {
-  min-height: 100vh;
-  font-family: "Bebas Neue", cursive;
-  background: #f4f4f4;
-}
 section {
   display: flex;
   min-height: 100vh;
