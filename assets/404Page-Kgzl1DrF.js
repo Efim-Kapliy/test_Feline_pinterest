@@ -1,0 +1,1 @@
+import{j as r}from"./index-Pp-rTOqm.js";import{E as s}from"./ErrorMassage-dIkj-3ov.js";import"./index-zPFfC8LZ.js";const a=()=>r.jsx(r.Fragment,{children:r.jsx(s,{children:r.jsx("div",{className:"not-found",children:r.jsx("h4",{children:"страница не найдена"})})})});export{a as default};
