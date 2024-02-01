@@ -58,6 +58,7 @@ const CatList = (props) => {
 
       return <ul className="cats__grid">{items}</ul>;
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [catList]
   );
 

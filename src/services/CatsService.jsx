@@ -13,12 +13,6 @@ const useCatsService = () => {
     return res.map(_transformCharacter);
   };
 
-  const getCat = async (id) => {
-    const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
-
-    return _transformCharacter(res);
-  };
-
   const _transformCharacter = (cat) => {
     return {
       id: cat.id,
@@ -27,7 +21,7 @@ const useCatsService = () => {
     };
   };
 
-  return { loading, error, clearError, getCat, getAllCats };
+  return { loading, error, clearError, getAllCats };
 };
 
 export default useCatsService;
