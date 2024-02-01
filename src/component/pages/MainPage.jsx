@@ -3,15 +3,20 @@ import CatList from "../catList/CatList";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 const MainPage = (props) => {
-  const { addCatInFavoriteList, removeCatInFavoriteList } = props;
+  const { favoriteCatList, addCatInFavoriteList, removeCatInFavoriteList } = props;
   return (
     <ErrorBoundary>
-      <CatList addCatInFavoriteList={addCatInFavoriteList} removeCatInFavoriteList={removeCatInFavoriteList} />
+      <CatList
+        favoriteCatList={favoriteCatList}
+        addCatInFavoriteList={addCatInFavoriteList}
+        removeCatInFavoriteList={removeCatInFavoriteList}
+      />
     </ErrorBoundary>
   );
 };
 
 MainPage.propTypes = {
+  favoriteCatList: PropTypes.array.isRequired,
   addCatInFavoriteList: PropTypes.func.isRequired,
   removeCatInFavoriteList: PropTypes.func.isRequired,
 };

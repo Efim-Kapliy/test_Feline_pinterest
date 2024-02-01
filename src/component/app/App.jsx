@@ -27,6 +27,7 @@ function App() {
               path="/"
               element={
                 <MainPage
+                  favoriteCatList={favoriteCatList}
                   addCatInFavoriteList={addCatInFavoriteList}
                   removeCatInFavoriteList={removeCatInFavoriteList}
                 />
