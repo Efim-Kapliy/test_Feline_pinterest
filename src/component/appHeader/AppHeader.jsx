@@ -10,7 +10,7 @@ const AppHeader = () => {
           <ul className="header__navbar">
             <li>
               <NavLink
-                to="/"
+                to="/test_Feline_pinterest/"
                 end
                 className={({ isActive }) => (isActive ? "navbar__link navbar__link_active" : "navbar__link")}
               >
@@ -19,7 +19,7 @@ const AppHeader = () => {
             </li>
             <li>
               <NavLink
-                to="/favorite"
+                to="/test_Feline_pinterest/favorite"
                 className={({ isActive }) => (isActive ? "navbar__link navbar__link_active" : "navbar__link")}
               >
                 Любимые котики

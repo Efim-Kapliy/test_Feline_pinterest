@@ -26,7 +26,7 @@ function App() {
         <Suspense fallback={<Spinner />}>
           <Routes>
             <Route
-              path="/"
+              path="/test_Feline_pinterest/"
               element={
                 <MainPage
                   favoriteCatList={favoriteCatList}
@@ -36,7 +36,7 @@ function App() {
               }
             />
             <Route
-              path="/favorite"
+              path="/test_Feline_pinterest/favorite"
               element={
                 <CatFavoritePage
                   favoriteCatList={favoriteCatList}

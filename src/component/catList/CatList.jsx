@@ -20,13 +20,12 @@ const CatList = (props) => {
   const { favoriteCatList, addCatInFavoriteList, removeCatInFavoriteList } = props;
 
   useEffect(() => {
-    return () => {
-      onRequest(offset);
-    };
+    onRequest(offset);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onRequest(offset) {
+    console.log("test");
     setButtonLoadingLocked(true);
     getAllCats(offset).then(onCatListLoaded).finally(setButtonLoadingLocked(false));
   }
